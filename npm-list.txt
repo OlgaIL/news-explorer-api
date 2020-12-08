@@ -1,0 +1,51 @@
+# news-explorer-api
+Backend дипломной работы Яндекс.Практикум "Поиск новостей"
+
+
+
+$ npm list  --depth=0
+mesto-express2@1.0.0 C:\Users\Administrator\documents\dev\mesto-express\backend
+
++-- bcryptjs@2.4.3
++-- body-parser@1.19.0
++-- celebrate@13.0.4
++-- cors@2.8.5
+
++-- UNMET PEER DEPENDENCY eslint@7.14.0
++-- eslint-config-airbnb@18.2.0
++-- eslint-config-airbnb-base@14.2.0
++-- eslint-plugin-import@2.22.1
+
++-- eslint-plugin-jsx-a11y@6.3.0
++-- eslint-plugin-react@7.20.0
++-- eslint-plugin-react-hooks@4.0.0
+
++-- express@4.17.1
++-- express-winston@4.0.5
++-- jsonwebtoken@8.5.1
++-- mongoose@5.10.11
++-- nodemon@2.0.6
+
++-- prettier@2.1.2
+
++-- validator@13.5.1
+`-- winston@3.3.3
+
+
+
+$ npm list --depth=0
+news-explorer-api@1.0.0 C:\Users\Administrator\documents\dev\news-explorer-api
++-- bcryptjs@2.4.3
++-- body-parser@1.19.0
++-- celebrate@13.0.4
++-- cors@2.8.5
++-- eslint@7.15.0
++-- eslint-config-airbnb-base@14.2.1
++-- eslint-plugin-import@2.22.1
++-- express@4.17.1
++-- express-winston@4.0.5
++-- jsonwebtoken@8.5.1
++-- mongoose@5.11.5
++-- nodemon@2.0.6
++-- validator@13.5.1
+`-- winston@3.3.3
