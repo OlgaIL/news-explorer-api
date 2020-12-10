@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
     default: 'Имя пользователя',
     minlength: 2,
     maxlength: 30,
+    required: true,
   },
 
 });

@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs'); // импортируем bcrypt
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { SALT_ROUND, JWT_SECRET } = require('../config/index.js');
+const { SALT_ROUND, JWT_SECRET, NODE_ENV } = require('../config/index.js');
 
 const NoValideDataError = require('../errors/novalid-data-err');
 const ConflictError = require('../errors/conflict-err');
@@ -34,7 +34,9 @@ const login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // аутентификация успешна! пользователь в переменной user
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: 3600 });
+      const token = jwt.sign({ _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: 3600 });
       // вернём токен
       res.send({ token });
     })

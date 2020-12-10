@@ -2,17 +2,20 @@ const express = require('express');
 // const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 const cors = require('cors');
 const { errors } = require('celebrate');
+
+const { BD_HOST_NAME } = require('./config/index.js');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const userRout = require('./routes/users.js');
-const cardsRout = require('./routes/cards.js');
+const articleRout = require('./routes/articles.js');
 const errorRout = require('./routes/error.js');
 const authRouter = require('./routes/auth.js');
 
-// const auth = require('./middlewares/auth.js');
+const auth = require('./middlewares/auth.js');
 const errHendle = require('./middlewares/error.js');
 
 // Слушаем 3000 порт
@@ -21,7 +24,7 @@ const app = express();
 app.use(cors());
 
 // подключаемся к серверу mongo mongodb://localhost:27017/mestodb
-mongoose.connect('mongodb://localhost:27017/newsdb', {
+mongoose.connect(BD_HOST_NAME, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -52,15 +55,15 @@ app.get('/crash-test', () => {
 app.use('/', authRouter);
 
 // авторизация
-// app.use(auth);
+app.use(auth);
 
 app.use('/users', userRout);
-app.use('/cards', cardsRout);
+app.use('/articles', articleRout);
 app.all('*', errorRout);
 
 app.use(errorLogger); // подключаем логгер ошибок
-
 app.use(errors()); // обработчик ошибок celebrate
+
 app.use(errHendle);
 
 app.listen(PORT, () => {
