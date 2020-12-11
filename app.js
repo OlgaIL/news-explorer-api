@@ -6,20 +6,11 @@ require('dotenv').config();
 const cors = require('cors');
 const { errors } = require('celebrate');
 
-const { BD_HOST_NAME } = require('./config/index.js');
+const { BD_HOST_NAME, PORT } = require('./config/index.js');
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const userRout = require('./routes/users.js');
-const articleRout = require('./routes/articles.js');
-const errorRout = require('./routes/error.js');
-const authRouter = require('./routes/auth.js');
-
-const auth = require('./middlewares/auth.js');
 const errHendle = require('./middlewares/error.js');
+const routes = require('./routes');
 
-// Слушаем 3000 порт
-const { PORT = 3001 } = process.env;
 const app = express();
 app.use(cors());
 
@@ -31,16 +22,11 @@ mongoose.connect(BD_HOST_NAME, {
   useUnifiedTopology: true,
 });
 
-/** можно попробовать без bodyParser установки */
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
+
 /** для подключения фронта. для api не нужно */
 // app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(requestLogger); // подключаем логгер запросов
 
 /** код для проверки и ревью */
 /*
@@ -50,20 +36,21 @@ app.get('/crash-test', () => {
   }, 0);
 }); */
 
+app.use(routes);
+
+/* app.use(requestLogger); // подключаем логгер запросов
 // роуты, не требующие авторизации,
 // например, регистрация и логин
 app.use('/', authRouter);
-
 // авторизация
 app.use(auth);
-
 app.use('/users', userRout);
 app.use('/articles', articleRout);
 app.all('*', errorRout);
-
 app.use(errorLogger); // подключаем логгер ошибок
-app.use(errors()); // обработчик ошибок celebrate
+*/
 
+app.use(errors()); // обработчик ошибок celebrate
 app.use(errHendle);
 
 app.listen(PORT, () => {
