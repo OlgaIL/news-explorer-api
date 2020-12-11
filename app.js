@@ -1,9 +1,9 @@
 const express = require('express');
-// const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-require('dotenv').config();
+const helmet = require('helmet');
 const cors = require('cors');
+
 const { errors } = require('celebrate');
 
 const { BD_HOST_NAME, PORT } = require('./config/index.js');
@@ -22,6 +22,7 @@ mongoose.connect(BD_HOST_NAME, {
   useUnifiedTopology: true,
 });
 
+app.use(helmet());
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 

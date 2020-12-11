@@ -11,7 +11,7 @@ const validateUserBody = celebrate({
       .messages({
         'any.required': 'Поле email должно быть заполнено',
       }),
-    password: Joi.string().required().min(8)
+    password: Joi.string().required().min(8).empty()
       .messages({
         'string.min': 'Минимальная длина поля  password 8 символов',
         'any.required': 'Поле  password должно быть заполнено',
@@ -37,7 +37,7 @@ const validateAuthBody = celebrate({
     password: Joi.string().required().min(8)
       .messages({
         'string.min': 'Минимальная длина поля  password 8 символов',
-        'any.required': 'Поле  password должно быть заполнено',
+        'any.required': 'Поле password должно быть заполнено',
       }),
   }),
 });
@@ -57,7 +57,7 @@ const validateArticleBody = celebrate({
     }),
 
     source: Joi.string().required().messages({
-      'string.required': 'Поле  source должно быть заполнено',
+      'any.required': 'Поле source должно быть заполнено',
     }),
 
     date: Joi.string().required().messages({
