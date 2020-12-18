@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 const router = require('express').Router();
 const { createUser, login } = require('../controllers/auth.js');
 const { validateUserBody, validateAuthBody } = require('../middlewares/validation');

@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 const mongoose = require('mongoose');
 const { default: validator } = require('validator');
 

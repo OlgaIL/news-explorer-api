@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 const router = require('express').Router();
 const { getCards, createCard, deleteCard } = require('../controllers/articles');
 const { validateArticleBody, validateId } = require('../middlewares/validation');

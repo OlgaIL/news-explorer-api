@@ -29,33 +29,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // для приёма ве�
 /** для подключения фронта. для api не нужно */
 // app.use(express.static(path.join(__dirname, 'public')));
 
-/** код для проверки и ревью */
-/*
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-}); */
-
 app.use(routes);
-
-/* app.use(requestLogger); // подключаем логгер запросов
-// роуты, не требующие авторизации,
-// например, регистрация и логин
-app.use('/', authRouter);
-// авторизация
-app.use(auth);
-app.use('/users', userRout);
-app.use('/articles', articleRout);
-app.all('*', errorRout);
-app.use(errorLogger); // подключаем логгер ошибок
-*/
-
 app.use(errors()); // обработчик ошибок celebrate
 app.use(errHendle);
 
 app.listen(PORT, () => {
   /** Если всё работает, консоль покажет, какой порт приложение слушает */
-  // eslint-disable-next-line no-console
   console.log(`App listening on port ${PORT}`);
 });
